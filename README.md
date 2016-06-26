@@ -32,19 +32,5 @@ se llama al darle click al botón APRENDER, aqui se carga la interfaz aprenderla
 3. ReconocerActivity.java
 
 Se llama al darle Click al botón RECONOCER, aqui se carga la interfaz reconocerlayout.xml
-
-
-
-
-
-
-
-2- Graba un video y mientras se detectan las caras(reconocimiento).
-
-
-La interfaz se crea en el fichero:
-
-Content_reconocimientofacial.xml
-
 	
 
