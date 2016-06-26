@@ -1,6 +1,9 @@
 package com.videojavacv.jal.reconocimineto_facial;
 
-import android.media.MediaPlayer;
+/**
+ * Created by jal on 24/06/16.
+ */
+
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -34,35 +37,17 @@ public class RECONOCIMIENTOFACIALActivity extends AppCompatActivity {
         Button reconocerButton = (Button) findViewById(R.id.reconocer);
         if (!hasCamera())
             reconocerButton.setEnabled(false);
-
-
-        final String dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES) + "/CAPTURAS";
-        File newdir = new File(dir);
-        newdir.mkdirs();
-        String file = dir + "/video.mp4";
-        File mediaFile = new File(file);
-        try {
-            mediaFile.createNewFile();
-        } catch (IOException e) {
-        }
-
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_reconocimientofacial, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
@@ -75,7 +60,7 @@ public class RECONOCIMIENTOFACIALActivity extends AppCompatActivity {
                 if (resultCode == RESULT_OK) {
                     runOnUiThread(new Runnable() {
                         public void run() {
-                            Toast.makeText(getBaseContext(), "Vieo guardado en " + data.getDataString(), Toast.LENGTH_LONG).show();
+                            Toast.makeText(getBaseContext(), "Video guardado en " + data.getDataString(), Toast.LENGTH_LONG).show();
                         }
                     });
                 } else if (resultCode == RESULT_CANCELED) {
