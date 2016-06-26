@@ -26,18 +26,20 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Grabar"
+        android:id="@+id/grabar"
+        android:onClick="grabar"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="Reconocer"
         android:id="@+id/reconocer"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:onClick="startRecording"/>
+        android:onClick="reconocer"/>
 
-    <VideoView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/videoview"
-        android:background="@color/lightgray"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/aprender" />
 
 </RelativeLayout>

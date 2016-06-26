@@ -1,6 +1,5 @@
 package com.videojavacv.jal.reconocimineto_facial;
 
-
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -15,9 +14,8 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.widget.Button;
-import android.widget.MediaController;
 import android.widget.Toast;
-import android.widget.VideoView;
+
 import java.io.File;
 import java.io.IOException;
 
@@ -38,10 +36,15 @@ public class RECONOCIMIENTOFACIALActivity extends AppCompatActivity {
             reconocerButton.setEnabled(false);
 
 
-
-        /*Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("/mnt/sdcard/video.mp4"));
-        intent.setDataAndType(Uri.parse("/mnt/sdcard/video.mp4"), "video/mp4");
-        startActivity(intent);*/
+        final String dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES) + "/CAPTURAS";
+        File newdir = new File(dir);
+        newdir.mkdirs();
+        String file = dir + "/video.mp4";
+        File mediaFile = new File(file);
+        try {
+            mediaFile.createNewFile();
+        } catch (IOException e) {
+        }
 
     }
 
@@ -63,53 +66,18 @@ public class RECONOCIMIENTOFACIALActivity extends AppCompatActivity {
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
-    protected void onActivityResult(int requestCode,final  int resultCode,final Intent data) {
+    protected void onActivityResult(int requestCode, final int resultCode, final Intent data) {
         try {
             if (requestCode == VIDEO_CAPTURE) {
                 if (resultCode == RESULT_OK) {
-                    final String dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES) + "/CAPTURAS";
-                    File newdir = new File(dir);
-                    newdir.mkdirs();
-                    String file = dir + "/video.mp4";
-                    File mediaFile = new File(file);
-                    try {
-                        mediaFile.createNewFile();
-                    } catch (IOException e) {
-                    }
-                   /*final Uri videoUri =  data.getData();videoview.setVideoURI(Uri.parse(videoUri.toString()));
-                    videoview.setMediaController(new MediaController(this));
-                    videoview.requestFocus();
-                    videoview.start();*/
-
-                    final VideoView videoview = (VideoView)findViewById(R.id.videoview);
-                    try {
-                        // Start the MediaController
-                        MediaController mediacontroller = new MediaController(
-                                this);
-                        mediacontroller.setAnchorView(videoview);
-                        // Get the URL from String VideoURL
-                        Uri video = Uri.parse(file);
-                        videoview.setMediaController(mediacontroller);
-                        videoview.setVideoURI(video);
-
-                    } catch (Exception e) {
-                        Log.e("Error", e.getMessage());
-                        e.printStackTrace();
-                    }
-
-                    videoview.requestFocus();
-                    videoview.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-                        // Close the progress bar and play the video
-                        public void onPrepared(MediaPlayer mp) {
-                            videoview.start();
+                    runOnUiThread(new Runnable() {
+                        public void run() {
+                            Toast.makeText(getBaseContext(), "Vieo guardado en " + data.getDataString(), Toast.LENGTH_LONG).show();
                         }
                     });
-
-
                 } else if (resultCode == RESULT_CANCELED) {
                     runOnUiThread(new Runnable() {
                         public void run() {
@@ -124,35 +92,36 @@ public class RECONOCIMIENTOFACIALActivity extends AppCompatActivity {
                     });
                 }
             }
-        }catch(final Exception e){
+        } catch (final Exception e) {
             runOnUiThread(new Runnable() {
                 public void run() {
-                    //Toast.makeText(getBaseContext(), "Exception "+e.toString(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(getBaseContext(), "Exception " + e.toString(), Toast.LENGTH_LONG).show();
                 }
             });
-            Log.e("Exception ",e.toString());
+            Log.e("Exception ", e.toString());
         }
     }
 
     private boolean hasCamera() {
         if (getPackageManager().hasSystemFeature(
-                PackageManager.FEATURE_CAMERA_ANY)){
+                PackageManager.FEATURE_CAMERA_ANY)) {
             return true;
         } else {
             return false;
         }
     }
 
-    public void startRecording(View view)
-    {
-        //Movies/CAPTURAS/video.mp4
-        //Guardar en tarjeta
+    public void takePhoto(View v) {
+        Intent myIntent = new Intent(RECONOCIMIENTOFACIALActivity.this, AprenderActivity.class);
+        //myIntent.putExtra("key", value); //Optional parameters
+        RECONOCIMIENTOFACIALActivity.this.startActivity(myIntent);
+    }
+
+    public void grabar(View v) {
         final String dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES) + "/CAPTURAS";
-        //Guardar en movil
         File newdir = new File(dir);
         newdir.mkdirs();
         String file = dir + "/video.mp4";
-        //String file = "/mnt/sdcard/video.mp4";
         File mediaFile = new File(file);
         try {
             mediaFile.createNewFile();
@@ -164,11 +133,14 @@ public class RECONOCIMIENTOFACIALActivity extends AppCompatActivity {
         startActivityForResult(intent, VIDEO_CAPTURE);
     }
 
-    public void takePhoto(View v){
-         Intent myIntent = new Intent(RECONOCIMIENTOFACIALActivity.this, AprenderActivity.class);
-        //myIntent.putExtra("key", value); //Optional parameters
-        RECONOCIMIENTOFACIALActivity.this.startActivity(myIntent);
+    public void reconocer(View v) {
+        runOnUiThread(new Runnable() {
+            public void run() {
+                Intent myIntent = new Intent(RECONOCIMIENTOFACIALActivity.this, ReconocerActivity.class);
+                //myIntent.putExtra("key", value); //Optional parameters
+                RECONOCIMIENTOFACIALActivity.this.startActivity(myIntent);
+            }
+        });
     }
+
 }
-
-
