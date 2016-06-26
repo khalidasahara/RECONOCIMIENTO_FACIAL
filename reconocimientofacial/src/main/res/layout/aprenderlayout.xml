@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+    android:layout_width="fill_parent"
+    android:layout_height="50dp"
+    android:id="@+id/nameUser"
+    android:inputType="textCapWords"
+        android:text="Escriba su nombre:...."/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="tomar Foto"
+        android:id="@+id/takePhoto"
+        android:onClick="onClick"
+        android:layout_alignTop="@+id/volver"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Volver"
+        android:id="@+id/volver"
+        android:onClick="volver"
+        android:layout_below="@+id/nameUser"
+        android:layout_alignParentStart="true" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageViewPhoto"
+        android:background="@color/lightgray"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/takePhoto"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        />
+
+</RelativeLayout>

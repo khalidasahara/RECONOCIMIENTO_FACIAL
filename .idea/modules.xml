@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/RECONOCIMINETO_FACIAL.iml" filepath="$PROJECT_DIR$/RECONOCIMINETO_FACIAL.iml" />
+      <module fileurl="file://$PROJECT_DIR$/reconocimientofacial/reconocimientofacial.iml" filepath="$PROJECT_DIR$/reconocimientofacial/reconocimientofacial.iml" />
+    </modules>
+  </component>
+</project>
